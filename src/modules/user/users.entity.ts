@@ -1,17 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, Unique, Generated, BeforeInsert} from 'typeorm'
-import { v4 as uuidv4} from 'uuid'
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class Users {
 
 
 
-    @Column({
-        primary:true,
-        generated:"uuid"
-    })
+    @PrimaryGeneratedColumn("uuid")
     id: string
-    @BeforeInsert() generate(){ this.id=uuidv4() }
 
 
     @Column()

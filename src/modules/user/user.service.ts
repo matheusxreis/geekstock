@@ -16,6 +16,6 @@ export class UserService {
 
 
       listDataUser(id: string){
-        return this.userRepository.findOne({ id })
+        return this.userRepository.findOne({  })
       }
 }

@@ -21,6 +21,9 @@ export class AuthService{
     }
 
     async register(data: RegisterUserDTO ):Promise<void> {
+
+
+        
         
          this.userRepository.register(data)
 
