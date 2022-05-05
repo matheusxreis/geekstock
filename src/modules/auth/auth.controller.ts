@@ -11,7 +11,9 @@ constructor(private readonly authService: AuthService){}
 
 
 @Post("/login")
-login(@Body() username: string, password:string){
+login(@Body("username") username: string,
+        @Body("password") password:string){
+            
     return this.authService.login(username, password)
 }
 

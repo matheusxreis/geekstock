@@ -16,8 +16,11 @@ register(data:RegisterUserDTO):void{
  } 
  
  async findByUsername(username: string):Promise<Users>{
+
+    console.log(username)
      const user = await this.findOne({ username })
-        console.log(username)
+       
+     console.log(user)
      return user
  }
 
