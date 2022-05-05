@@ -10,9 +10,9 @@ export class AuthController {
 constructor(private readonly authService: AuthService){}
 
 
-@Get()
-login():string{
-    return this.authService.login()
+@Post("/login")
+login(@Body() username: string, password:string){
+    return this.authService.login(username, password)
 }
 
 

@@ -13,7 +13,13 @@ export class UserRepository extends Repository<Users>{
 register(data:RegisterUserDTO):void{
 
     this.save(data)
- }   
+ } 
+ 
+ async findByUsername(username: string):Promise<Users>{
+     const user = await this.findOne({ username })
+        console.log(user)
+     return user
+ }
 
 
 }
