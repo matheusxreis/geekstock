@@ -2,6 +2,7 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Post, Res, UseGuards, Vali
 import { Response } from "express";
 import { AuthService } from "./auth.service";
 import { RegisterUserDTO } from "./dto/register-user.dto";
+import { AdminGuard } from "./admin/admin-auth.guard";
 import { JwtAuthGuard } from "./jwt/jwt-auth.guard";
 
 
@@ -19,12 +20,10 @@ login(@Body("username") username: string,
 }
 
 
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, AdminGuard)
 @Post("/register")    
 register(@Body(new ValidationPipe()) registerUser: RegisterUserDTO){
-        this.authService.register(registerUser)
-
-
+        return this.authService.register(registerUser)
 
 }
 

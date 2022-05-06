@@ -61,10 +61,17 @@ export class AuthService{
 
     async register(data: RegisterUserDTO ):Promise<void> {
 
-        const { password } = data;
+        const { password, username} = data;
 
+        const usernameAlreadyExist = await this.userRepository.findByUsername(username);
+
+        if(usernameAlreadyExist){
+            console.log(usernameAlreadyExist)
+            throw new BadRequestException({error:"Username already exist!"})
+        }
 
         const encryptPassword = await bcryp.hash(password, 10);
+
     
         const newData = {
             ...data,
