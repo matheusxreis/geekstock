@@ -1,7 +1,8 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, Res, ValidationPipe} from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Res, UseGuards, ValidationPipe} from "@nestjs/common";
 import { Response } from "express";
 import { AuthService } from "./auth.service";
 import { RegisterUserDTO } from "./dto/register-user.dto";
+import { JwtAuthGuard } from "./jwt/jwt-auth.guard";
 
 
 @Controller('/auth')
@@ -18,6 +19,7 @@ login(@Body("username") username: string,
 }
 
 
+@UseGuards(JwtAuthGuard)
 @Post("/register")    
 register(@Body(new ValidationPipe()) registerUser: RegisterUserDTO){
         this.authService.register(registerUser)
