@@ -15,8 +15,10 @@ export class Products{
 
     updated_at: Date;
 
-    categorie: string;
+    category: string;
 
     price: number;
+
+    amount:number;
 
 }
