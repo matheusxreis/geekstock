@@ -1,3 +1,4 @@
+import { query } from "express";
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
 export class CreateProducts1651984737804 implements MigrationInterface {
@@ -35,12 +36,13 @@ export class CreateProducts1651984737804 implements MigrationInterface {
                    },
                    {
                     name: "added_by",
-                    type: "varchar(60)",
+                    type: "uuid",
                     isNullable: false
                    },
                    {
                     name: "updated_by",
-                    type:"varchar(60)"
+                    type:"uuid",
+                    isNullable:true,
                    },
                    {
                     name:"added_at",
@@ -50,7 +52,8 @@ export class CreateProducts1651984737804 implements MigrationInterface {
                    },
                    {
                     name:"updated_at",
-                    type: "timestamp"
+                    type: "timestamp",
+                    isNullable:true,
                    },
                    {
                     name:"category",
@@ -60,12 +63,48 @@ export class CreateProducts1651984737804 implements MigrationInterface {
                    }
 
                ]
-           })       
+           }))
+        
+       await queryRunner.createForeignKey(
+            "products",
+         new TableForeignKey({
+             name:"FK_CATEGORY",
+             columnNames: ["category"],
+             referencedColumnNames: ["id"],
+             referencedTableName: "categories",
+            onDelete: "SET NULL"
+         }))
 
+        await queryRunner.createForeignKey(
+            "products",
+            new TableForeignKey({
+            name:"FK_ADDED_BY",
+            columnNames: ["added_by"],
+            referencedColumnNames: ["id"],
+            referencedTableName: "users",
+            onDelete: "SET NULL"
+            })
         )
+
+        await queryRunner.createForeignKey(
+        "products",
+        new TableForeignKey({
+            name:"FK_UPDATED_BY",
+            columnNames: ["updated_by"],
+            referencedColumnNames: ["id"],
+            referencedTableName: "users",
+            onDelete: "SET NULL"
+        })
+    )
+            
+      
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+
+        await queryRunner.dropForeignKey("products", "FK_ADDED_BY")
+        await queryRunner.dropForeignKey("products", "FK_UPDATED_BY")
+        await queryRunner.dropForeignKey("products", "FK_CATEGORY")
     
         await queryRunner.dropTable("products")
     }

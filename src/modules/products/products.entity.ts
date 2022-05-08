@@ -1,24 +1,59 @@
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Category } from "../category/category.entity";
+import { User } from "../user/user.entity";
 
 
 
-export class Products{
+@Entity("products")
+export class Product{
 
+
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
+    @Column({
+        nullable:false,
+        unique:true
+    })
     name: string;
 
-    created_by:string;
+    
+    @Column({
+        nullable: false,
+    })
+    @ManyToOne(()=> User, user => user.id)
+    added_by:string;
 
-    created_at: Date;
 
+    @Column({
+        nullable: false
+    })
+    added_at: Date;
+
+    
+    @Column({
+        nullable:true
+    })
+    @ManyToOne(()=> User, user => user.id)
     updated_by:string;
 
+    @Column({
+        nullable:true
+    })
     updated_at: Date;
 
+  
+    @ManyToOne(()=> Category, category => category.id)
     category: string;
 
+    @Column({
+        nullable:false
+    })
     price: number;
 
+    @Column({
+        nullable:false
+    })
     amount:number;
 
 }
