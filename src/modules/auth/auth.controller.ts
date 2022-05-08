@@ -27,10 +27,5 @@ register(@Body(new ValidationPipe()) registerUser: RegisterUserDTO){
 
 }
 
-@Get("/teste")
-listUser():RegisterUserDTO[]{
-    return this.authService.users
-}
-
 
 }

@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthModule } from './modules/auth/auth.module';
+import { ProductsModule } from './modules/products/products.module';
 import { UserModule } from './modules/user/user.module';
 
 
@@ -19,10 +20,12 @@ import { UserModule } from './modules/user/user.module';
       "password": process.env.DATABASE_PASSWORD,
       "database": process.env.DATABASE_NAME,
       "entities": ["dist/modules/**/*.entity{.ts,.js}"],
-      "synchronize": true
+      "synchronize": false,
+      "migrations":["dist/migrations/*{.ts,.js}"],
     }),
     AuthModule,
     UserModule,
+    ProductsModule
   ]
 })
 export class AppModule {}

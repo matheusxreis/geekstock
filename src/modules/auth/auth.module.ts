@@ -14,8 +14,7 @@ dotenv.config();
 @Module({
     imports: [UserModule,
             JwtModule.register({secret: process.env.JWT_SECRET,
-                                signOptions: { expiresIn: '60m' }}),
-            TypeOrmModule.forFeature([UserRepository])],
+                                signOptions: { expiresIn: '60m' }})],
     controllers: [AuthController],
     providers: [AuthService, JwtStrategy, AdminGuard],
 })
