@@ -3,8 +3,7 @@ import { UserRepository } from "../user/user.repository";
 import { RegisterUserDTO } from "./dto/register-user.dto";
 import * as bcryp from "bcrypt"
 import { JwtService } from "@nestjs/jwt";
-import { Users } from "../user/users.entity";
-
+import { User } from "../user/user.entity";
 
 @Injectable()
 export class AuthService{
@@ -45,7 +44,7 @@ export class AuthService{
     }
 
 
-    async validateUser(username: string, password: string):Promise<Users|null>{
+    async validateUser(username: string, password: string):Promise<User|null>{
         const user = await this.userRepository.findByUsername(username)
 
         if(user){

@@ -1,10 +1,10 @@
 import { EntityRepository, Repository } from "typeorm";
 import { RegisterUserDTO } from "../auth/dto/register-user.dto";
-import { Users } from "./users.entity";
+import { User } from "./user.entity";
 
 
-@EntityRepository(Users)
-export class UserRepository extends Repository<Users>{
+@EntityRepository(User)
+export class UserRepository extends Repository<User>{
 
     constructor(){
         super()
@@ -15,7 +15,7 @@ register(data:RegisterUserDTO):void{
     this.save(data)
  } 
  
- async findByUsername(username: string):Promise<Users>{
+ async findByUsername(username: string):Promise<User>{
 
      const user = await this.findOne({ username })
        
@@ -23,7 +23,7 @@ register(data:RegisterUserDTO):void{
      return user
  }
 
- async findById(id: string):Promise<Users>{
+ async findById(id: string):Promise<User>{
 
     console.log(id)
 
