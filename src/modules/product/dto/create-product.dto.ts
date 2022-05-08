@@ -23,4 +23,8 @@ export class CreateProductDTO {
     @IsString()
     category: string
 
+
+    @IsString()
+    photo?:string;
+
 }
