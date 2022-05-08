@@ -19,6 +19,7 @@ export class AdminGuard implements CanActivate {
 
         const user = await this.userRepository.findById(userId)
 
+        console.log(user)
 
         if(user.perfil === 1){
             return true

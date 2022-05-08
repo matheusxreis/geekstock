@@ -19,14 +19,11 @@ register(data:RegisterUserDTO):void{
 
      const user = await this.findOne({ username })
        
-     console.log(user)
+     
      return user
  }
 
  async findById(id: string):Promise<User>{
-
-    console.log(id)
-
 
      const user = await this.findOne({ id })
        

@@ -20,7 +20,7 @@ login(@Body("username") username: string,
 }
 
 
-@UseGuards(JwtAuthGuard, AdminGuard)
+//@UseGuards(JwtAuthGuard, AdminGuard)
 @Post("/register")    
 register(@Body(new ValidationPipe()) registerUser: RegisterUserDTO){
         return this.authService.register(registerUser)
