@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Category } from "../category/category.entity";
 import { User } from "../user/user.entity";
 
@@ -21,7 +21,7 @@ export class Product{
     @Column({
         nullable: false,
     })
-    @ManyToOne(()=> User, user => user.id)
+   // @ManyToOne(()=> User, user => user.id)
     added_by:string;
 
 
@@ -31,19 +31,20 @@ export class Product{
     added_at: Date;
 
     
-    @Column({
-        nullable:true
-    })
-    @ManyToOne(()=> User, user => user.id)
+    
+   // @ManyToOne(()=> User, user => user.id)
+   @Column()
     updated_by:string;
 
     @Column({
         nullable:true
     })
+
     updated_at: Date;
 
   
-    @ManyToOne(()=> Category, category => category.id)
+   @Column()
+   // @ManyToOne(type => Category, category => category.products)
     category: string;
 
     @Column({

@@ -42,7 +42,7 @@ export class CreateProducts1651984737804 implements MigrationInterface {
                    {
                     name: "updated_by",
                     type:"uuid",
-                    isNullable:true,
+                    isNullable:false,
                    },
                    {
                     name:"added_at",
